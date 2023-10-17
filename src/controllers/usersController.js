@@ -13,13 +13,16 @@ import bcrypt from 'bcrypt';
 export const getUsers = async (req, res) => {
 
     const query = req.query;
+    const userParam = req.params;
 
     try {
-        if (query.username) {
-            const users = await User.find({username: query.username}).select('-password').lean();
+        if (query.username || userParam.username) {
+            const username = query.username || userParam.username;
+
+            const users = await User.find({username: username}).select('-password').lean();
             
             if (users.length) return res.json(users);
-            else return res.status(400).json({message: `Usuário '${query.username}' não foi encontrado.`});
+            else return res.status(400).json({message: `Usuário '${username}' não foi encontrado.`});
            
         }
         else {

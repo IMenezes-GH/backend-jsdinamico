@@ -8,4 +8,8 @@ router.route('/')
             .patch(updateUser)
             .delete(deleteUser)
 
+router.route('/:username')
+            .get(getUsers)
+
+
 export {router};
