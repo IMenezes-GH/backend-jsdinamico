@@ -74,6 +74,13 @@ export const createUser = async (req,res) => {
     }
 };
 
+
+// PATCH /user
+/**
+ * Controla a resposta do endpoint /user
+ * @param {Request} req PATCH REQUEST FOR /user
+ * @param {Response} res PATCH RESPONSE FOR /user
+ */
 export const updateUser = async (req, res) => {
 
     const {id, name, username, password} = req.body;
@@ -109,6 +116,33 @@ export const updateUser = async (req, res) => {
             cError(`Não foi possível atualizar o usuário ${user.username}.`);
             return res.status(400).json({message: `Não foi possível atualizar o usuário: ${user.username}.`});
         }
+
+    } catch (err){
+        cError(err.stack);
+        res.status(500).json(err.message);
+    }
+
+}
+
+// DELETE /user
+/**
+ * Controla a resposta do endpoint /user
+ * @param {Request} req DELETE REQUEST FOR /user
+ * @param {Response} res DELETE RESPONSE FOR /user
+ */
+export const deleteUser = async (req, res) => {
+
+    const {id} = req.body;
+
+    try {
+
+        const user = await User.findById(id).exec();
+        if (!user) return res.json({message: 'Esse usuário não pode ser deletado. Usuário não existe.'});
+        
+        const deletedUser = await user.deleteOne();
+
+        cInfo(`usuário ${deletedUser.username} foi deletado.`);
+        return res.json({message: `usuário ${deletedUser.username} foi deletado.`});
 
     } catch (err){
         cError(err.stack);
