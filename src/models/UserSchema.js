@@ -15,6 +15,10 @@ const UserSchema = Schema({
         type: String,
         required: true
     },
+    creationDate: {
+        type: Date,
+        required: true
+    },
 
     tasks: [TaskSchema]
 })
