@@ -2,7 +2,10 @@ import Express from "express";
 import chalk from "chalk";
 
 import { configDotenv } from "dotenv";
+
 import cors from 'cors';
+import corsOptions from "./config/corsOptions.js";
+
 configDotenv();
 
 import {cLog, cInfo, cWarn, cError} from './config/chalkConfig.js';
@@ -22,7 +25,7 @@ mongoConnect();
 const PORT = process.env.PORT || 3100; 
 const app = Express();
 
-app.use(cors());
+app.use(cors(corsOptions));
 
 app.use('/', Express.urlencoded({extended:false}));
 
