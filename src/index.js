@@ -28,7 +28,7 @@ app.use('/', Express.urlencoded({extended:false}));
 
 app.use('/', root);
 app.use('/user', userRoute);
-// app.use('/user/:username/tasks', taskRoute);
+app.use('/user', taskRoute);
 
 
 app.all('*', async (req, res) => {

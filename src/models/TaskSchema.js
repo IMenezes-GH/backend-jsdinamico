@@ -1,20 +1,46 @@
-import { Schema } from "mongoose";
+import { Schema, model } from "mongoose";
 
 export const TaskSchema = Schema({
+    userId: {
+        type: Schema.Types.ObjectId,
+        required: true,
+    },
     title: {
-        type: String,
+        type: Schema.Types.String,
         required: true,
     },
     description: {
-        type: String
+        type: Schema.Types.String
     },
     type: {
-        type: String,
+        type: Schema.Types.String,
         default: 'normal',
         required: true,
     },
-    due_date: {
-        type: Date,
+    creationDate: {
+        type: Schema.Types.Date,
+        required: true
     },
-    To_do: [{objective:String, checked: Boolean}]
+    completed: {
+        type: Schema.Types.Boolean,
+        required: true,
+        default: false
+    },
+    due_date: {
+        type: Schema.Types.Date,
+    },
+    to_do: {
+        type: [{
+            objective: {
+                type: Schema.Types.String,
+            },
+            checked: {
+                type: Schema.Types.Boolean,
+                default: false
+            }
+        }]
+    }
 })
+
+const Task = model('Task', TaskSchema);
+export {Task};

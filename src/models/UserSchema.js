@@ -3,24 +3,22 @@ import { TaskSchema } from "./TaskSchema.js";
 
 const UserSchema = Schema({
     name: {
-        type: String,
+        type: Schema.Types.String,
         required: true,
     },
     username: {
-        type: String,
+        type: Schema.Types.String,
         required: true,
         unique: true,
     },
     password: {
-        type: String,
+        type: Schema.Types.String,
         required: true
     },
     creationDate: {
-        type: Date,
+        type: Schema.Types.Date,
         required: true
-    },
-
-    tasks: [TaskSchema]
+    }
 })
 
 const User = model('User', UserSchema);
