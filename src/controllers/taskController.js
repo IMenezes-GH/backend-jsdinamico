@@ -9,15 +9,11 @@ export const getTasks = async (req, res) => {
 
     try {
         const user = await User.findOne({username}).select('-password').lean().exec();
-        const userId = user._id;
-        if (id) {
-            const task = await Task.findById(id).exec();
-            if (!task) return res.json({message: 'Nenhuma tarefa encontrada.'});
-            return res.json(task);
-        };
-        
-        if (user.tasks.length === 0) return res.json({message: 'Nenhuma tarefa encontrada.'});
-        res.json(user.tasks);
+        if (!user) return res.status(404).json({message: 'Usuário não existe.'});
+    
+        const tasks = await Task.find({userId: user._id}).lean().exec();
+        if (tasks.length === 0) return res.json({message: 'Nenhuma tarefa encontrada.'})
+        res.json(tasks);
 
     } catch (err){
         cError(err.stack);
