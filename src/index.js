@@ -5,10 +5,12 @@ import { configDotenv } from "dotenv";
 configDotenv();
 
 import {cLog, cInfo, cWarn, cError} from './config/chalkConfig.js';
+
+// ROUTES =============================================================
 import {router as root} from "./routes/root.js";
+import {router as userRoute} from './routes/user.js';
 
 import mongoConnect from "./config/mongoConnect.js";
-import { User } from "./models/UserSchema.js";
 import mongoose from "mongoose";
 
 // -------------------------------------------------------------------
@@ -19,6 +21,7 @@ const PORT = process.env.PORT || 3100;
 const app = Express();
 
 app.use('/', root);
+app.use('/user', userRoute);
 
 
 app.all('*', async (req, res) => {
