@@ -6,7 +6,8 @@
   "description": "Backend do projeto final de front-end dinâmico",
   "main": "./src/index.js",
   "scripts": {
-    "dev": "node --watch ./src/index.js"
+    "start" : "node ./index.js",
+    "dev": "node --watch ./index.js"
   },
   "keywords": [],
   "author": "",
