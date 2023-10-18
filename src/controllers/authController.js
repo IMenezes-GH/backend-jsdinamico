@@ -27,7 +27,7 @@ const login = async(req, res) => {
             maxAge: 1000 * 60 * 60 * 24 * 7
         })
 
-        res.json({message: 'Login is successful!'});
+        res.json({accessToken});
 
     } catch (err){
         cError(err.stack);
