@@ -4,11 +4,11 @@ import JWTVerify from "../middleware/JWTVerify.js";
 
 const router = Router();
 
-router.use(JWTVerify);
+router.route('/').post(createUser) // Rota para cadastro
 
+router.use(JWTVerify);
 router.route('/')
             .get(getUsers)
-            .post(createUser)
             .patch(updateUser)
             .delete(deleteUser)
 
