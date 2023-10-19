@@ -47,3 +47,5 @@ mongoose.connection.once('open', () => {
         cInfo(`Servidor está rodando no port: ${chalk.yellow(PORT)}`);
     })
 });
+
+export default app;
