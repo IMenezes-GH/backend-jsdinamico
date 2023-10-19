@@ -28,7 +28,8 @@ const app = Express();
 
 app.use(cors());
 
-app.use('/', Express.urlencoded({extended:false}));
+app.use(Express.urlencoded({extended:false}));
+app.use(Express.json());
 
 app.use('/', root);
 app.use('/user', userRoute);
