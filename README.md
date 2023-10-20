@@ -8,6 +8,8 @@ Backend da resolução do projeto final de javascript dinâmico do programa <Pri
 
 Para autenticação e autorização de usuário a API utiliza JWT e cookies. Endpoints com métodos em **negrito** precisam de um Bearer token para acesso autorizado.
 
+[Link para o front-end](https://github.com/IMenezes-GH/frontend-jsdinamico)
+
 ## Endpoints:
 
 **/**  <code>GET</code>  
