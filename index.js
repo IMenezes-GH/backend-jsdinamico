@@ -26,7 +26,7 @@ mongoConnect();
 const PORT = process.env.PORT || 3100; 
 const app = Express();
 
-app.use(cors());
+app.use(cors(corsOptions));
 
 app.use(Express.urlencoded({extended:false}));
 app.use(Express.json());
