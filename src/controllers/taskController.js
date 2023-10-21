@@ -41,13 +41,14 @@ export const createTask = async (req, res) => {
             tasks: [],
             creationDate: new Date(),
             due_date,
-            completed: false
+            completed: false,
+            to_do: []
         }
         
-        const parsedTodo = JSON.parse(to_do);
         
         const task = await Task.create(newTask);
-
+        
+        const parsedTodo = JSON.parse(to_do);
         if (parsedTodo && parsedTodo?.length > 0){
             for (let i = 0; i < parsedTodo.length; i++){
                 task.to_do.push(parsedTodo[i]);
@@ -63,6 +64,30 @@ export const createTask = async (req, res) => {
             res.status(400).json({message: 'Não foi possível criar essa tarefa.'})
         }
 
+    } catch (err){
+        cError(err.stack);
+        res.status(500).json(err.message);
+    }
+}
+
+export const updateTask = async(req, res) => {
+
+    const {_id, title, description, to_do, due_date, type} = req.body;
+
+    try {
+        const task = await Task.findById(_id);
+        if (!task) return res.status(404).json({message: 'Tarefa não encontrada'});
+
+        
+        task.title = title || task.title;
+        task.description = description || task.description;
+        task.to_do = to_do || task.to_do;
+        task.due_date = due_date || task.due_date;
+        task.type = type || task.type;
+        
+        await task.save();
+        
+        res.json(task);
     } catch (err){
         cError(err.stack);
         res.status(500).json(err.message);
