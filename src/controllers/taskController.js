@@ -86,10 +86,30 @@ export const updateTask = async(req, res) => {
         task.type = type || task.type;
         
         await task.save();
-        
+
         res.json(task);
     } catch (err){
         cError(err.stack);
         res.status(500).json(err.message);
     }
+}
+
+export const deleteTask = async (req, res) => {
+
+    const {_id} = req.body;
+
+    try {
+        const task = await Task.findById(_id);
+        console.log(task);
+        if (!task) return res.status(404).json({message: 'Tarefa não encontrada'});
+
+        const deletedTask = await task.deleteOne();
+
+        res.json({message: `Tarefa: ${deletedTask.title} deletada.`});
+
+    } catch (err){
+        cError(err.stack);
+        res.status(500).json(err.message);
+    }
+
 }
