@@ -20,4 +20,4 @@ Para autenticação e autorização de usuário a API utiliza JWT e cookies. End
 
 **/user/:username** <code>**GET**</code>  
 
-**/user/:username/tasks** <code>**GET**</code> <code>**POST**</code> <code>**PATCH**</code> 
+**/user/:username/tasks** <code>**GET**</code> <code>**POST**</code> <code>**PATCH**</code> <code>**DELETE**</code>  
