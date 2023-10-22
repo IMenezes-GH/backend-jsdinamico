@@ -72,10 +72,10 @@ export const createTask = async (req, res) => {
 
 export const updateTask = async(req, res) => {
 
-    const {_id, title, description, to_do, due_date, type} = req.body;
+    const {id, title, description, to_do, due_date, type, completed} = req.body;
 
     try {
-        const task = await Task.findById(_id);
+        const task = await Task.findById(id);
         if (!task) return res.status(404).json({message: 'Tarefa não encontrada'});
 
         
@@ -84,6 +84,7 @@ export const updateTask = async(req, res) => {
         task.to_do = to_do || task.to_do;
         task.due_date = due_date || task.due_date;
         task.type = type || task.type;
+        task.completed = completed || task.completed;
         
         await task.save();
 
@@ -96,11 +97,10 @@ export const updateTask = async(req, res) => {
 
 export const deleteTask = async (req, res) => {
 
-    const {_id} = req.body;
+    const {id} = req.body;
 
     try {
-        const task = await Task.findById(_id);
-        console.log(task);
+        const task = await Task.findById(id);
         if (!task) return res.status(404).json({message: 'Tarefa não encontrada'});
 
         const deletedTask = await task.deleteOne();
